@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Lista de Produtos</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <div th:switch="${produtos}">
+            <h2 th:case="null">Nao existem registros cadastrados!</h2>
+            <div th:case="*">
+                <h2>Lista de Produtos</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Descrição</th>
+                        <th>Custo</th>
+                        <th>Quantidade</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="produto : ${produtos}">
+                        <td th:text="${produto.id}"></td>
+                        <td th:text="${produto.descricao}"></td>
+                        <td th:text="${produto.custo}"></td>
+                         <td th:text="${produto.quantidade}"></td>
+                        <td><a th:href="@{/edit/{id}(id=${produto.id})}">Edit</a></td>
+                        <td><a th:href="@{/sig/produtos/{id}(id=${produto.id})}">Delete</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><a href="/signup">Cadastro</a></p>
+        </div>
+    </body>
+</html>
